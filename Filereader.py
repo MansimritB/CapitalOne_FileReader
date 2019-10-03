@@ -1,7 +1,17 @@
+#Mansimrit Bajwa
+#FileReader.py
+#Assumption: Commenting syntax used and Python,C,Java
+#Assumption: When finding total number of lines whitespaces are considered in the linecount
+#Assumption: File that will checked is in the same directory as FileReader.py
+
 def filecheck(f):
-    
-    file = open(f,'r') #opening inputted file and preparing to read it into a list 
-    x = file.readlines()
+
+    try:
+        file = open(f,'r') #opening inputted file and preparing to read it into a list
+    except IOError:
+        print("File does not exist") #check to see if the file exists in the directory
+        return 0,0,0,0,0,0           #Stops the program returning all 
+    x = file.readlines()  #Variable x used to store all 
 
     #Initializing variables
     totallines = 0
@@ -32,7 +42,7 @@ def filecheck(f):
             comments_in_block +=1
             
         #Checks for the end of a block of comments indicating that there is a block 
-        elif '#' in x[i] and '#'  not in x[i+1] and '#' in x[i-1]:
+        elif '#' in x[i] and '#'  not in x[i+1] and '#' in x[i-1]: #Exclusive to python
             block_line_comments +=1
             comments_in_block +=1
             
@@ -48,11 +58,12 @@ def filecheck(f):
         
 while True:
     filename = input("Input file name: ")  #Taking user input for file to be used
+
     if filename[0] == '.':                  #Used to catch wrong input by user and prompt them to enter it again
         print("Error: cannot input file starting with '.")  #Ensures that input has extension and filname doesn't start with '.'
     elif '.' not in filename:
         print("Error: only file with an extension is accepted")
-    
+
     else:
         break
 
