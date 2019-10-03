@@ -2,7 +2,7 @@
 #FileReader.py
 #Assumption: Commenting syntax used for program files Python,C,Java
 #Assumption: When finding total number of lines whitespaces are considered in the linecount
-#Assumption: File that will checked is in the same directory as FileReader.py
+#Assumption: File that will be checked is in the same directory as FileReader.py
 
 def filecheck(f):
 
@@ -51,14 +51,14 @@ def filecheck(f):
                 comments+=1
             if 'TODO' in x[i]:
                 todo +=1
-                
+            #Looking for SingleComments    
             if '//' in x[i]:
                 singlecomments+=1
             
-            if '/*' in x[i] or '*' in x[i] or '*/' in x[i]:
+            if '/*' in x[i] or '*' in x[i] or '*/' in x[i]: #Looking for blockcomments and how many comments inside
                 comments_in_block +=1
                 if '*/' in x[i]:
-                    block_line_comments +=1
+                    block_line_comments +=1                 #Checks for the end of block
         
     file.close()
 
@@ -68,7 +68,7 @@ while True:
     filename = input("Input file name: ")  #Taking user input for file to be used
 
     if filename[0] == '.':                  #Used to catch wrong input by user and prompt them to enter it again
-        print("Error: cannot input file starting with '.")  #Ensures that input has extension and filename doesn't start with '.'
+        print("Error: cannot input file starting with '.'")  #Ensures that input has extension and filename doesn't start with '.'
     elif '.' not in filename:
         print("Error: only file with an extension is accepted")
 
